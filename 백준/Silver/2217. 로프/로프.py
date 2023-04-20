@@ -1,16 +1,18 @@
+import sys
+
 # 로프 입력
 ropes = []
-N = int(input())
+N = int(sys.stdin.readline().rstrip())
 for i in range(N) :
-    ropes.append(int(input()))
+    rope = int(sys.stdin.readline().rstrip())
+    ropes.append(rope)
 
 # 최대 중량 계산
 weights = []
 ropes.sort()
 
-while ropes :
-    weights.append(ropes[0]*len(ropes))
-    del ropes[0]
+for i in range(N) :
+    weights.append(ropes[i] * (N-i))
     
 max_weight = max(weights)
 print(max_weight)

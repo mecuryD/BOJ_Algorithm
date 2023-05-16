@@ -11,8 +11,6 @@ tape_end = pos[0] - 0.5 + l
 for i in range(1,n) :
     if tape_end >= pos[i]+0.5 :
         continue
-    elif tape_end == pos[i] :
-        tape_start = pos[i] # new tape
     else :
         tape_start = pos[i] - 0.5 # new tape
     

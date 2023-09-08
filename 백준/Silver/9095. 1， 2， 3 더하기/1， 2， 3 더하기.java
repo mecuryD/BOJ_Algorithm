@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class Main{
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine()); // 테스트 케이스 개수
@@ -14,11 +14,9 @@ public class Main {
 		for(int i=4; i<11; i++) 
 			table[i] = table[i-1] + table[i-2] + table[i-3];
 		
-        StringBuilder sb = new StringBuilder();
 		for(int i=0; i<T; i++) {
 			int N = Integer.parseInt(br.readLine());
-			sb.append(table[N] + "\n");
-		}
-        System.out.print(sb);
+			System.out.println(table[N]);
+		}	
 	}
 }

@@ -86,7 +86,6 @@ public class Main {
 			// 만약 좋아하는 학생이 한 명도 안 앉아 있다면, 비어 있는 자리에 앉힌다
 			// 만약 좋아하는 학생이 한 명이라도 앉아 있으면 조건에 맞게 앉힌다
 			Pos cur = (pq.isEmpty()) ? getPosition() : pq.poll();
-//			System.out.println(String.format("큐에서 뽑힌 위치 : (%d, %d)", cur.r, cur.c));
 			posMap.put(stdNum, new int[] { cur.r, cur.c });
 			isSitted[cur.r][cur.c] = true;
 			pq.clear();
@@ -94,10 +93,6 @@ public class Main {
 		
 		// 점수 계산
 		System.out.println(getScore());
-//		for(int pos : posMap.keySet()) {
-//			int[] cur = posMap.get(pos);
-////			System.out.println(String.format("%d의 위치 : (%d, %d)", pos, cur[0], cur[1]));
-//		}
 	}
 	
 	// 빈 자리의 개수를 반환하는 메서드
@@ -149,8 +144,6 @@ public class Main {
 				if(isNext(cur, next)) cnt++;
 			}
 			
-//			System.out.println(String.format("%d번 학생의 인접 학생 수 : %d", i,cnt));
-//			System.out.println("현재 추가되는 점수 : " + (int)Math.pow(10, cnt-1));
 			if(cnt>0) score += (int)Math.pow(10, cnt-1);
 		}
 		return score;

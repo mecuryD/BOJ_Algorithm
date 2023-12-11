@@ -1,36 +1,34 @@
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main{
-	
-	static int N, K;
-	static Queue<Integer> q;
-	
-	public static void main(String[] args) {
+public class Main {
+
+	public static void main(String[] args) throws IOException{
+		// 값 입력
 		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		K = sc.nextInt();
+		int N = sc.nextInt();
+		int K = sc.nextInt();
 		
-		q = new ArrayDeque<>();
-		for(int i=1; i<=N; i++) {
-			q.offer(i); // 1부터 N까지 큐에 삽입
+		Queue<Integer> queue = new ArrayDeque<Integer>();
+		for(int i=1; i<=N; i++){
+			queue.offer(i);
 		}
 		
-		int cnt = 0;
-		StringBuilder sb = new StringBuilder();
+		// 요세푸스 순열을 구한다
+		StringBuffer sb = new StringBuffer();
 		sb.append("<");
-		
-		while(q.size()!=1) { // 마지막 하나가 남을 때까지 반복
-			int tmp = q.poll();
-			if(cnt % K == K-1) { // K번째 수
-				sb.append(tmp+", ");
-			}else {				
-				q.offer(tmp);
+		for(int i=1; i<N; i++) {
+			for(int j=1; j<K; j++) {
+				int tmp = queue.poll();
+				queue.offer(tmp);
 			}
-			cnt++;
+			sb.append(String.format("%d, ", queue.poll()));
 		}
-		sb.append(q.poll()+">");
-		System.out.println(sb.toString());
+		sb.append(String.format("%d>", queue.poll() ));
+		
+		// 결과 출력
+		System.out.println(sb);
 	}
 }

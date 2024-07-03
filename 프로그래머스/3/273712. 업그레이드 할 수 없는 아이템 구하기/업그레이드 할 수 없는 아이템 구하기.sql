@@ -1,0 +1,15 @@
+-- 더 이상 업그레이드 할 수 없는 아이템에 대해
+-- 아이템 id, 아이템 명, 아이템의 희귀도 출력
+-- 아이템 id를 기준으로 내림차순
+SELECT I.ITEM_ID, I.ITEM_NAME, I.RARITY
+FROM ITEM_INFO I
+INNER JOIN ITEM_TREE T
+ON I.ITEM_ID = T.ITEM_ID
+WHERE I.ITEM_ID NOT IN 
+(    
+    SELECT DISTINCT(PARENT_ITEM_ID)
+    FROM ITEM_TREE
+    WHERE PARENT_ITEM_ID IS NOT NULL
+)
+ORDER BY I.ITEM_ID DESC
+

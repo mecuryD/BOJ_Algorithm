@@ -7,13 +7,13 @@ class Solution {
     
     public int solution(int[] numbers, int target) {
         int n = numbers.length;
-        // dfs(n, target, 0, 0, numbers);
-        bfs(n, target, numbers);
+        dfs(n, target, 0, 0, numbers);
+        // bfs(n, target, numbers);
         return result;
     }
     
     
-    // DFS 완전 탐색 (17분)
+    // DFS 완전 탐색 (최소 0.18ms, 최대 6.99ms)
     public void dfs(int n, int target, int idx, int sum, int[] numbers){
         if(idx==n){
             if(sum==target){
@@ -29,7 +29,7 @@ class Solution {
         dfs(n, target, idx + 1, sum - numbers[idx], numbers);
     }
     
-    // BFS 완전 탐색
+    // BFS 완전 탐색 (최소 0.95ms, 최대 125.65ms)
     public void bfs(int n, int target, int[] numbers){
         Queue<int[]> queue = new ArrayDeque<int[]>();
         queue.offer(new int[]{0, numbers[0]});

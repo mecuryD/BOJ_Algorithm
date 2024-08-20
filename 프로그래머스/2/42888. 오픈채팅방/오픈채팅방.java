@@ -4,33 +4,24 @@ import java.util.*;
 class Solution {
     
     public String[] solution(String[] record) {
-        String[] message = new String[]{"님이 들어왔습니다.", "님이 나갔습니다."};
-        Queue<Info> buffer = new ArrayDeque<Info>(); 
+        // 기록 각각에 대해 (아이디-닉네임) 쌍을 해쉬로 관리한다
         Map<String, String> nickname = new HashMap<String, String>();
-        
-        // 기록 각각에 대해 닉네임은 해쉬로, 입퇴장정보는 큐로 관리한다
         for(String r : record){
             String[] chat = r.split(" ");
-            
-            if(chat[0].equals("Change")){
+            if(!chat[0].equals("Leave")){
                 nickname.put(chat[1], chat[2]);
-            }else if(chat[0].equals("Enter")){
-                nickname.put(chat[1], chat[2]);
-                buffer.offer(new Info(chat[1], 0));
-            }else{
-                buffer.offer(new Info(chat[1], 1));
             }
         }
         
         // 관리자가 최종적으로 확인하는 메세지를 배열에 추가한다
-        int length = buffer.size();
-        String[] result = new String[length];
-        for(int i=0; i<length; i++){
-            Info info = buffer.poll();
-            result[i] = nickname.get(info.id) + message[info.state];
+        ArrayList<String> result = new ArrayList<String>();
+        for(String r : record){
+            String[] chat = r.split(" ");
+            if(chat[0].equals("Enter")) result.add(nickname.get(chat[1]).concat("님이 들어왔습니다."));
+            else if(chat[0].equals("Leave")) result.add(nickname.get(chat[1]).concat("님이 나갔습니다."));
         }
         
-        return result;
+        return result.toArray(new String[0]);
     }
     
     // 입퇴장 정보 클래스
